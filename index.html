@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plataforma Multimedia PRO</title>
+
+<style>
+body{
+    margin:12;
+    font-family:algerian;
+    background:url("foto pantalla.JPEG") no-repeat center/cover;
+    color:white;
+    text-align:center;
+}
+
+*{ transition: all 0.3s ease; }
+
+.seccion{display:none;padding:20px;}
+.activa{display:block;}
+
+button{
+    padding:10px 20px;
+    border:none;
+    border-radius:10px;
+    margin:10px;
+    cursor:pointer;
+    background:#111;
+    color:white;
+}
+
+button:hover{background:#ff3d3d;}
+
+.grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:rgba(0,0,0,0.7);
+    padding:10px;
+    border-radius:15px;
+
+    /* 💡 LED amarillo SIEMPRE activo */
+    box-shadow: 0 0 10px #ffd700,
+                0 0 20px #ffd700,
+                0 0 30px #ffd700;
+}
+
+/* Hover solo aumenta el efecto */
+.card:hover{
+    transform:scale(1.05);
+    box-shadow: 0 0 20px #ffd700,
+                0 0 40px #ffd700,
+                0 0 70px #ffd700;
+}
+
+img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+    border-radius:10px;
+
+    /* 💚 LED verde SIEMPRE activo */
+    box-shadow: 0 0 10px #00ff00,
+                0 0 20px #00ff00,
+                0 0 30px #00ff00;
+}
+
+/* Hover opcional más fuerte */
+img:hover{
+    box-shadow: 0 0 15px #00ff00,
+                0 0 30px #00ff00,
+                0 0 50px #00ff00;
+}
+/* 🔥 CONTENEDOR PRO */
+.programacion{
+    position: relative;
+    margin:30px auto;
+    padding:25px;
+    max-width:750px;
+    border-radius:20px;
+    backdrop-filter: blur(20px);
+    background: rgba(0,0,0,0.65);
+    overflow:hidden;
+    animation: aparecer 0.8s ease;
+}
+
+/* BORDE LED PRO SUAVE */
+.programacion::before{
+    content:"";
+    position:absolute;
+    top:-2px;
+    left:-2px;
+    right:-2px;
+    bottom:-2px;
+    border-radius:22px;
+    background: linear-gradient(
+        120deg,
+        #ff0000,
+        #ff00ff,
+        #00ffff,
+        #00ff88,
+        #ffff00,
+        #ff0000
+    );
+    background-size:400%;
+    animation: ledGlow 6s linear infinite;
+    z-index:-1;
+    filter: blur(4px);
+}
+
+/* FONDO INTERNO */
+.programacion::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:20px;
+    background: rgba(0,0,0,0.85);
+    z-index:-1;
+}
+
+/* TABLA PRO */
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+}
+
+/* ENCABEZADO */
+th{
+    background: linear-gradient(45deg, #ff0000, #ff00ff);
+    padding:14px;
+    font-size:17px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+/* CELDAS */
+td{
+    padding:14px;
+    border-bottom:1px solid rgba(255,255,255,0.15);
+}
+
+/* EFECTO HOVER FILAS */
+tr{
+    transition:0.3s;
+}
+
+tr:hover{
+    background:rgba(255,255,255,0.08);
+    transform:scale(1.01);
+}
+
+/* LINKS PRO */
+a{
+    color:#00ffe5;
+    text-decoration:none;
+    font-weight:bold;
+    position:relative;
+}
+
+/* SUBRAYADO ANIMADO */
+a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-3px;
+    width:0%;
+    height:2px;
+    background:#00ffe5;
+    transition:0.3s;
+}
+
+a:hover::after{
+    width:100%;
+}
+
+<!-- ================= ESTILOS ================= -->
+<style>
+body{
+    margin:0;
+    font-family:algerian, sans-serif;
+    background: radial-gradient(circle at top, #0b132b, #1c2541, #3a506b);
+    color:white;
+    text-align:center;
+    overflow:hidden;
+}
+
+/* SECCIONES */
+.seccion{
+    display:none;
+    padding:40px 20px;
+}
+
+.activa{
+    display:block;
+    animation: aparecer 1s ease;
+}
+
+/* TITULO */
+h1{
+    font-size:4em;
+    background: linear-gradient(90deg, #ff00cc, #00ffcc, #ffcc00);
+    background-size:400%;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation: brillo 6s linear infinite;
+}
+
+/* ICONO */
+.icono{
+    font-size:90px;
+    margin:20px 0;
+    animation: flotar 4s ease-in-out infinite;
+}
+
+/* IMAGEN */
+img{
+    width:80%;
+    max-width:500px;
+    border-radius:20px;
+    animation: flotarImagen 5s ease-in-out infinite;
+}
+
+/* ================= BOTÓN ROSADO PEQUEÑO ================= */
+button{
+    position:relative;
+    padding:12px 35px;         /* Más pequeño y compacto */
+    border:none;
+    border-radius:35px;        /* Ajuste proporcional */
+    font-size:16px;             /* Texto más pequeño */
+    cursor:pointer;
+    margin-top:15px;            /* Ajuste de margen */
+    color:white;
+
+    background: linear-gradient(135deg, #ff4fd8, #ff2fb3);
+
+    /* brillo suave rosado */
+    box-shadow:
+        0 0 6px rgba(255,79,216,0.5),
+        0 0 12px rgba(255,47,179,0.4),
+        0 0 18px rgba(255,47,179,0.3);
+
+    transition:0.3s;
+}
+
+/* HOVER SUAVE */
+button:hover{
+    transform:scale(1.05);     /* Pequeño efecto al pasar mouse */
+    box-shadow:
+        0 0 10px rgba(255,79,216,0.7),
+        0 0 20px rgba(255,47,179,0.6),
+        0 0 30px rgba(255,47,179,0.4);
+}
+/* ================= PARTÍCULAS BLANCAS ================= */
+.particulas{
+    position:absolute;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    pointer-events:none;
+    overflow:hidden;
+}
+
+.particulas span{
+    position:absolute;
+    width:4px;
+    height:4px;
+    border-radius:50%;
+    background:white;
+    opacity:0.7;
+    animation: subir linear infinite, brilloParticula 2s infinite;
+}
+
+/* Movimiento hacia arriba */
+@keyframes subir{
+    from{
+        transform:translateY(100vh);
+        opacity:1;
+    }
+    to{
+        transform:translateY(-10vh);
+        opacity:0;
+    }
+}
+
+/* brillo suave */
+@keyframes brilloParticula{
+    0%,100%{opacity:0.3;}
+    50%{opacity:1;}
+}
+
+/* ================= ANIMACIONES ================= */
+@keyframes flotar{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-15px);}
+}
+
+@keyframes flotarImagen{
+    0%,100%{transform:translateY(0) scale(1);}
+    50%{transform:translateY(-20px) scale(1.05);}
+}
+
+@keyframes aparecer{
+    from{opacity:0; transform:scale(0.8);}
+    to{opacity:1; transform:scale(1);}
+}
+
+@keyframes brillo{
+    0%{background-position:0%;}
+    100%{background-position:400%;}
+}
+</style>
+
+<!-- ================= PARTÍCULAS ================= -->
+<div class="particulas" id="particulas"></div>
+
+<!-- ================= INICIO ================= -->
+<div id="inicio" class="seccion activa">
+
+    <h1>✨ Bienvenida ✨</h1>
+
+    <div class="icono">😊</div>
+
+    
+
+
+
+
+    <button onclick="mostrar('categorias')">
+        Entrar
+    </button>
+
+</div>
+
+<!-- ================= JS ================= -->
+<script>
+
+function mostrar(id){
+    document.querySelectorAll('.seccion').forEach(sec=>{
+        sec.classList.remove('activa');
+    });
+    document.getElementById(id).classList.add('activa');
+}
+
+/* PARTÍCULAS BLANCAS */
+const contenedor = document.getElementById("particulas");
+
+for(let i=0; i<120; i++){
+    let span = document.createElement("span");
+
+    span.style.left = Math.random()*100 + "%";
+    span.style.animationDuration = (Math.random()*5 + 3) + "s";
+    span.style.animationDelay = (Math.random()*5) + "s";
+
+    contenedor.appendChild(span);
+}
+
+</script>
+<!-- CATEGORIAS -->
+<div id="categorias" class="seccion">
+<h2>Categorías</h2>
+
+<div class="grid">
+
+<div class="card">
+<img src="deportes.JPEG">
+<h3>Deportes</h3>
+<button onclick="mostrar('deportes')">Entrar</button>
+</div>
+
+<div class="card">
+<img src="noticias.JPEG">
+<h3>Noticias</h3>
+<button onclick="mostrar('noticias')">Entrar</button>
+</div>
+
+<div class="card">
+<img src="peliculas.JPEG">
+<h3>Películas</h3>
+<button onclick="mostrar('peliculas')">Entrar</button>
+</div>
+
+<div class="card">
+<img src="novelas.JPEG">
+<h3>Novelas</h3>
+<button onclick="mostrar('novelas')">Entrar</button>
+</div>
+
+<div class="card">
+<img src="entretenimiento.JPEG">
+<h3>Entretenimiento</h3>
+<button onclick="mostrar('entretenimiento')">Entrar</button>
+</div>
+
+</div>
+
+<button onclick="mostrar('inicio')">Volver</button>
+</div>
+
+
+<!-- ================= DEPORTES ================= -->
+<div id="deportes" class="seccion">
+<h2 style="letter-spacing:3px; text-transform:uppercase;">Deportes</h2>
+
+<div class="grid">
+
+<div class="card">
+<img src="espn.JPEG">
+<h3>ESPN</h3>
+<button onclick="mostrar('espn')">Ver</button>
+</div>
+
+<div class="card">
+<img src="fox.JPEG">
+<h3>FOX Sports</h3>
+<button onclick="mostrar('fox')">Ver</button>
+</div>
+
+<div class="card">
+<img src="tudn.JPEG">
+<h3>TUDN</h3>
+<button onclick="mostrar('tudn')">Ver</button>
+</div>
+
+<div class="card">
+<img src="tigo.JPEG">
+<h3>TIGO SPORT</h3>
+<button onclick="mostrar('tigo')">Ver</button>
+</div>
+
+<div class="card">
+<img src="claro.JPEG">
+<h3>CLARO SPORT</h3>
+<button onclick="mostrar('claro')">Ver</button>
+</div>
+
+</div>
+
+<button onclick="mostrar('categorias')">Volver</button>
+</div>
+
+<!-- ================= ESPN ================= -->
+<div id="espn" class="seccion">
+<h2>ESPN</h2>
+
+<div class="programacion">
+<table>
+<tr><th>Hora</th><th>Programa</th></tr>
+
+<tr><td>6:00 PM</td><td><a href="https://www.youtube.com/results?search_query=espn+futbol+en+vivo" target="_blank">Fútbol en vivo ESPN</a></td></tr>
+<tr><td>7:00 PM</td><td><a href="https://www.youtube.com/results?search_query=espn+noticias+deportivas" target="_blank">Noticias deportivas</a></td></tr>
+<tr><td>8:00 PM</td><td><a href="https://www.youtube.com/results?search_query=espn+resumen" target="_blank">Resumen</a></td></tr>
+<tr><td>9:00 PM</td><td><a href="https://www.youtube.com/results?search_query=espn+analisis" target="_blank">Análisis</a></td></tr>
+<tr><td>10:00 PM</td><td><a href="https://www.youtube.com/results?search_query=espn+champions+league" target="_blank">Champions</a></td></tr>
+
+</table>
+</div>
+
+<button onclick="mostrar('deportes')">Volver</button>
+</div>
+
+<!-- ================= FOX ================= -->
+<div id="fox" class="seccion">
+<h2>FOX Sports</h2>
+
+<div class="programacion">
+<table>
+<tr><th>Hora</th><th>Programa</th></tr>
+
+<tr><td>6:00 PM</td><td><a href="https://www.youtube.com/results?search_query=fox+sports+en+vivo" target="_blank">Fútbol en vivo</a></td></tr>
+<tr><td>7:00 PM</td><td><a href="https://www.youtube.com/results?search_query=fox+sports+noticias" target="_blank">Noticias</a></td></tr>
+<tr><td>8:00 PM</td><td><a href="https://www.youtube.com/results?search_query=fox+sports+resumen" target="_blank">Resumen</a></td></tr>
+<tr><td>9:00 PM</td><td><a href="https://www.youtube.com/results?search_query=fox+sports+analisis" target="_blank">Análisis</a></td></tr>
+<tr><td>10:00 PM</td><td><a href="https://www.youtube.com/results?search_query=fox+sports" target="_blank">Especial FOX</a></td></tr>
+
+</table>
+</div>
+
+<button onclick="mostrar('deportes')">Volver</button>
+</div>
+
+<!-- ================= TUDN ================= -->
+<div id="tudn" class="seccion">
+<h2>TUDN</h2>
+
+<div class="programacion">
+<table>
+<tr><th>Hora</th><th>Programa</th></tr>
+
+<tr><td>6:00 PM</td><td><a href="https://www.youtube.com/results?search_query=tudn+en+vivo" target="_blank">Fútbol en vivo</a></td></tr>
+<tr><td>7:00 PM</td><td><a href="https://www.youtube.com/results?search_query=tudn+noticias" target="_blank">Noticias</a></td></tr>
+<tr><td>8:00 PM</td><td><a href="https://www.youtube.com/results?search_query=tudn+resumen" target="_blank">Resumen</a></td></tr>
+<tr><td>9:00 PM</td><td><a href="https://www.youtube.com/results?search_query=tudn+analisis" target="_blank">Análisis</a></td></tr>
+<tr><td>10:00 PM</td><td><a href="https://www.youtube.com/results?search_query=tudn+liga+mx" target="_blank">Liga MX</a></td></tr>
+
+</table>
+</div>
+
+<button onclick="mostrar('deportes')">Volver</button>
+</div>
+
+<!-- ================= TIGO ================= -->
+<div id="tigo" class="seccion">
+<h2>Tigo Sports</h2>
+
+<div class="programacion">
+<table>
+<tr><th>Hora</th><th>Programa</th></tr>
+
+<tr><td>6:00 PM</td><td><a href="https://www.youtube.com/results?search_query=tigo+sports+en+vivo" target="_blank">Liga en vivo</a></td></tr>
+<tr><td>7:00 PM</td><td><a href="https://www.youtube.com/results?search_query=tigo+sports+noticias" target="_blank">Noticias</a></td></tr>
+<tr><td>8:00 PM</td><td><a href="https://www.youtube.com/results?search_query=tigo+sports+resumen" target="_blank">Resumen</a></td></tr>
+<tr><td>9:00 PM</td><td><a href="https://www.youtube.com/results?search_query=tigo+sports+analisis" target="_blank">Análisis</a></td></tr>
+<tr><td>10:00 PM</td><td><a href="https://www.youtube.com/results?search_query=tigo+sports+honduras" target="_blank">Especial Honduras</a></td></tr>
+
+</table>
+</div>
+
+<button onclick="mostrar('deportes')">Volver</button>
+</div>
+
+<!-- ================= CLARO ================= -->
+<div id="claro" class="seccion">
+<h2>Claro Sports</h2>
+
+<div class="programacion">
+<table>
+<tr><th>Hora</th><th>Programa</th></tr>
+
+<tr><td>6:00 PM</td><td><a href="https://www.youtube.com/results?search_query=claro+sports+en+vivo" target="_blank">En vivo</a></td></tr>
+<tr><td>7:00 PM</td><td><a href="https://www.youtube.com/results?search_query=claro+sports+noticias" target="_blank">Noticias</a></td></tr>
+<tr><td>8:00 PM</td><td><a href="https://www.youtube.com/results?search_query=claro+sports+resumen" target="_blank">Resumen</a></td></tr>
+<tr><td>9:00 PM</td><td><a href="https://www.youtube.com/results?search_query=claro+sports+analisis" target="_blank">Análisis</a></td></tr>
+<tr><td>10:00 PM</td><td><a href="https://www.youtube.com/results?search_query=claro+sports" target="_blank">Especial</a></td></tr>
+
+</table>
+</div>
+
+<button onclick="mostrar('deportes')">Volver</button>
+</div>
+<!-- ================= NOTICIAS ================= -->
+<!-- ================= NOTICIAS ================= -->
+<div id="noticias" class="seccion">
+<h2 style="letter-spacing:3px; text-transform:uppercase;">Noticias</h2>
+
+<!-- ===== NACIONALES ===== -->
+<h3 style="margin-top:20px;">Noticias Nacionales</h3>
+
+<div class="grid">
+
+<div class="card">
+<img src="canal 5.JPEG">
+<h3>Canal 5</h3>
+<button onclick="mostrar('canal5')">Ver programación</button>
+</div>
+
+<div class="card">
+<img src="hch.JPEG">
+<h3>HCH</h3>
+<button onclick="mostrar('hch')">Ver programación</button>
+</div>
+
+<div class="card">
+<img src="canal 11.JPEG">
+<h3>Canal 11</h3>
+<button onclick="mostrar('canal11')">Ver programación</button>
+</div>
+
+<div class="card">
+<img src="tsi.JPEG">
+<h3>TSI </h3>
+<button onclick="mostrar('canal8')">Ver programación</button>
+</div>
+
+<div class="card">
+<img src="canal 6.JPEG">
+<h3>Canal 6</h3>
+<button onclick="mostrar('canal6')">Ver programación</button>
+</div>
+
+</div>
+
+<!-- ===== INTERNACIONALES ===== -->
+<h3 style="margin-top:30px;">Noticias Internacionales</h3>
+
+<div class="grid">
+
+<div class="card">
+<img src="telemundo.JPEG">
+<h3>Telemundo</h3>
+<button onclick="mostrar('telemundo')">Ver programación</button>
+</div>
+
+<div class="card">
+<img src="cnn.JPEG">
+<h3>CNN en Español</h3>
+<button onclick="mostrar('cnn')">Ver programación</button>
+</div>
+
+<div class="card">
+<img src="frances.JPEG">
+<h3>France 24</h3>
+<button onclick="mostrar('france24')">Ver programación</button>
+</div>
+
+<div class="card">
+<img src="latinus.JPEG">
+<h3>Latinus</h3>
+<button onclick="mostrar('latinus')">Ver programación</button>
+</div>
+
+<div class="card">
+<img src="azteca.JPEG">
+<h3>TV Azteca</h3>
+<button onclick="mostrar('azteca')">Ver programación</button>
+</div>
+
+<div class="card">
+<img src="america.JPEG">
+<h3>Caracol 360</h3>
+<button onclick="mostrar('caracol')">Ver programación</button>
+</div>
+
+</div>
+
+<button onclick="mostrar('categorias')">Volver</button>
+</div>
+
+
+<!-- ================= ESTILO PRO LUCES ================= -->
+<style>
+.programacion-box{
+    max-width:600px;
+    margin:20px auto;
+    padding:20px;
+    background:#111;
+    border-radius:15px;
+    border:3px solid #00ffff;
+    box-shadow:0 0 20px #00ffff, 0 0 40px #ff00ff;
+    text-align:center;
+}
+
+.programacion-box h2{
+    color:#00ffff;
+    margin-bottom:10px;
+    text-shadow:0 0 10px #00ffff;
+}
+
+.programacion-box table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:10px;
+}
+
+.programacion-box th, 
+.programacion-box td{
+    border:2px solid #ff00ff;
+    padding:12px;
+}
+
+.programacion-box th{
+    background:#ff00ff;
+    color:#000;
+}
+
+.programacion-box a{
+    color:#00ffff;
+    font-weight:bold;
+}
+</style>
+
+
+<!-- ================= CANAL EJEMPLO (MISMO ESTILO PARA TODOS) ================= -->
+
+<div id="canal5" class="seccion">
+<div class="programacion-card">
+<h2>Canal 5 - Programación</h2>
+
+<table>
+<tr><th>Hora</th><th>Programa</th></tr>
+
+<tr><td>6:00 AM</td><td><a href="https://www.youtube.com/results?search_query=canal+5+honduras+noticias">Noticias matutinas</a></td></tr>
+<tr><td>12:00 PM</td><td><a href="https://www.youtube.com/results?search_query=canal+5+mediodia">Edición del mediodía</a></td></tr>
+<tr><td>6:00 PM</td><td><a href="https://www.youtube.com/results?search_query=canal+5+noticias">Noticias central</a></td></tr>
+<tr><td>9:00 PM</td><td><a href="https://www.youtube.com/results?search_query=canal+5+analisis">Análisis</a></td></tr>
+
+</table>
+
+<br>
+<button onclick="mostrar('noticias')">⬅ Volver</button>
+</div>
+</div>
+
+
+<!-- ================= HCH ================= -->
+<div id="hch" class="seccion">
+<div class="programacion-card">
+<h2>HCH - Programación</h2>
+
+<table>
+<tr><th>Hora</th><th>Programa</th></tr>
+
+<tr><td>5:00 AM</td><td><a href="https://www.youtube.com/results?search_query=hch+noticias">Noticiero HCH</a></td></tr>
+<tr><td>12:00 PM</td><td><a href="https://www.youtube.com/results?search_query=hch+al+mediodia">Mediodía</a></td></tr>
+<tr><td>5:00 PM</td><td><a href="https://www.youtube.com/results?search_query=hch+tarde">Noticias tarde</a></td></tr>
+<tr><td>9:00 PM</td><td><a href="https://www.youtube.com/results?search_query=hch+analisis">Análisis</a></td></tr>
+
+</table>
+
+<br>
+<button onclick="mostrar('noticias')">⬅ Volver</button>
+</div>
+</div>
+
+<div id="canal11" class="seccion">
+<div class="programacion-card">
+<h2>Canal 11 - Programación</h2>
+
+<table>
+<tr><th>Hora</th><th>Programa</th></tr>
+
+<tr><td>6:00 AM</td><td><a href="https://www.youtube.com/results?search_query=canal+11+noticias">Noticias tempranas</a></td></tr>
+<tr><td>12:00 PM</td><td><a href="https://www.youtube.com/results?search_query=canal+11+mediodia">Noticias mediodía</a></td></tr>
+<tr><td>6:00 PM</td><td><a href="https://www.youtube.com/results?search_query=canal+11+noticias">Noticiero central</a></td></tr>
+<tr><td>9:00 PM</td><td><a href="https://www.youtube.com/results?search_query=canal+11+analisis">Análisis</a></td></tr>
+
+</table>
+
+<br>
+<button onclick="mostrar('noticias')">⬅ Volver</button>
+</div>
+</div>
+
+<div id="canal8" class="seccion">
+<div class="programacion-card">
+<h2>Canal 8 (TSI) - Programación</h2>
+
+<table>
+<tr><th>Hora</th><th>Programa</th></tr>
+
+<tr><td>6:00 AM</td><td><a href="https://www.youtube.com/results?search_query=canal+8+noticias">Noticias TSI</a></td></tr>
+<tr><td>12:00 PM</td><td><a href="https://www.youtube.com/results?search_query=tsi+mediodia">Mediodía</a></td></tr>
+<tr><td>6:00 PM</td><td><a href="https://www.youtube.com/results?search_query=tsi+noticias">Noticiero central</a></td></tr>
+<tr><td>9:00 PM</td><td><a href="https://www.youtube.com/results?search_query=tsi+analisis">Análisis</a></td></tr>
+
+</table>
+
+<br>
+<button onclick="mostrar('noticias')">⬅ Volver</button>
+</div>
+</div>
+<div id="canal6" class="seccion">
+<div class="programacion-card">
+<h2>Canal 6 - Programación</h2>
+
+<table>
+<tr><th>Hora</th><th>Programa</th></tr>
+
+<tr><td>6:00 AM</td><td><a href="https://www.youtube.com/results?search_query=canal+6+noticias">Noticias matutinas</a></td></tr>
+<tr><td>12:00 PM</td><td><a href="https://www.youtube.com/results?search_query=canal+6+mediodia">Mediodía</a></td></tr>
+<tr><td>6:00 PM</td><td><a href="https://www.youtube.com/results?search_query=canal+6+noticias">Noticiero central</a></td></tr>
+<tr><td>9:00 PM</td><td><a href="https://www.youtube.com/results?search_query=canal+6+analisis">Análisis</a></td></tr>
+
+</table>
+
+<br>
+<button onclick="mostrar('noticias')">⬅ Volver</button>
+</div>
+</div>
+
+
+<div id="telemundo" class="seccion">
+<div class="programacion-card">
+<h2>Telemundo - Programación</h2>
+
+<table>
+<tr><th>Hora</th><th>Programa</th></tr>
+
+<tr><td>7:00 AM</td><td><a href="https://www.youtube.com/results?search_query=telemundo+noticias">Noticias</a></td></tr>
+<tr><td>12:00 PM</td><td><a href="https://www.youtube.com/results?search_query=telemundo+mediodia">Mediodía</a></td></tr>
+<tr><td>6:00 PM</td><td><a href="https://www.youtube.com/results?search_query=telemundo+noticias">Noticias central</a></td></tr>
+<tr><td>9:00 PM</td><td><a href="https://www.youtube.com/results?search_query=telemundo+analisis">Análisis</a></td></tr>
+
+</table>
+
+<br>
+<button onclick="mostrar('noticias')">⬅ Volver</button>
+</div>
+</div>
+<!-- ================= CNN ================= -->
+<div id="cnn" class="seccion">
+<div class="programacion-card">
+<h2>CNN en Español</h2>
+
+<table>
+<tr><th>Hora</th><th>Programa</th></tr>
+
+<tr><td>7:00 AM</td><td><a href="https://www.youtube.com/results?search_query=cnn+espanol+noticias">Noticias</a></td></tr>
+<tr><td>12:00 PM</td><td><a href="https://www.youtube.com/results?search_query=cnn+mediodia">Mediodía</a></td></tr>
+<tr><td>6:00 PM</td><td><a href="https://www.youtube.com/results?search_query=cnn+analisis">Noticias</a></td></tr>
+<tr><td>9:00 PM</td><td><a href="https://www.youtube.com/results?search_query=cnn+analisis">Análisis</a></td></tr>
+
+</table>
+
+<br>
+<button onclick="mostrar('noticias')">⬅ Volver</button>
+</div>
+</div>
+
+
+<div id="france24" class="seccion">
+<div class="programacion-card">
+<h2>France 24</h2>
+
+<table>
+<tr><th>Hora</th><th>Programa</th></tr>
+
+<tr><td>6:00 AM</td><td><a href="https://www.youtube.com/results?search_query=france+24+noticias">Noticias internacionales</a></td></tr>
+<tr><td>12:00 PM</td><td><a href="https://www.youtube.com/results?search_query=france+24">Mediodía</a></td></tr>
+<tr><td>6:00 PM</td><td><a href="https://www.youtube.com/results?search_query=france+24+en+vivo">Noticias</a></td></tr>
+<tr><td>9:00 PM</td><td><a href="https://www.youtube.com/results?search_query=france+24+analisis">Análisis</a></td></tr>
+
+</table>
+
+<br>
+<button onclick="mostrar('noticias')">⬅ Volver</button>
+</div>
+</div>
+
+<div id="latinus" class="seccion">
+<div class="programacion-card">
+<h2>Latinus</h2>
+
+<table>
+<tr><th>Hora</th><th>Programa</th></tr>
+
+<tr><td>7:00 AM</td><td><a href="https://www.youtube.com/results?search_query=latinus+noticias">Noticias</a></td></tr>
+<tr><td>12:00 PM</td><td><a href="https://www.youtube.com/results?search_query=latinus">Mediodía</a></td></tr>
+<tr><td>6:00 PM</td><td><a href="https://www.youtube.com/results?search_query=latinus+analisis">Análisis</a></td></tr>
+<tr><td>9:00 PM</td><td><a href="https://www.youtube.com/results?search_query=latinus+investigacion">Investigación</a></td></tr>
+
+</table>
+
+<br>
+<button onclick="mostrar('noticias')">⬅ Volver</button>
+</div>
+</div>
+
+<div id="azteca" class="seccion">
+<div class="programacion-card">
+<h2>TV Azteca</h2>
+
+<table>
+<tr><th>Hora</th><th>Programa</th></tr>
+
+<tr><td>6:00 AM</td><td><a href="https://www.youtube.com/results?search_query=tv+azteca+noticias">Hechos AM</a></td></tr>
+<tr><td>12:00 PM</td><td><a href="https://www.youtube.com/results?search_query=tv+azteca+mediodia">Mediodía</a></td></tr>
+<tr><td>6:00 PM</td><td><a href="https://www.youtube.com/results?search_query=tv+azteca+hechos">Hechos</a></td></tr>
+<tr><td>9:00 PM</td><td><a href="https://www.youtube.com/results?search_query=tv+azteca+analisis">Análisis</a></td></tr>
+
+</table>
+
+<br>
+<button onclick="mostrar('noticias')">⬅ Volver</button>
+</div>
+</div>
+
+<div id="caracol" class="seccion">
+<div class="programacion-card">
+<h2>Caracol 360</h2>
+
+<table>
+<tr><th>Hora</th><th>Programa</th></tr>
+
+<tr><td>6:00 AM</td><td><a href="https://www.youtube.com/results?search_query=caracol+noticias">Noticias</a></td></tr>
+<tr><td>12:00 PM</td><td><a href="https://www.youtube.com/results?search_query=caracol+mediodia">Mediodía</a></td></tr>
+<tr><td>6:00 PM</td><td><a href="https://www.youtube.com/results?search_query=caracol+noticias">Noticias central</a></td></tr>
+<tr><td>9:00 PM</td><td><a href="https://www.youtube.com/results?search_query=caracol+analisis">Análisis</a></td></tr>
+
+</table>
+
+<br>
+<button onclick="mostrar('noticias')">⬅ Volver</button>
+</div>
+</div>
+
+<!-- ================= PELÍCULAS ================= -->
+<div id="peliculas" class="seccion">
+<h2 style="letter-spacing:3px; text-transform:uppercase;">Películas</h2>
+
+<div class="grid">
+
+
+
+<div class="card">
+<img src="space.JPEG">
+<h3>Space</h3>
+<button onclick="mostrar('space')">Ver programación</button>
+</div>
+
+<div class="card">
+<img src="cinemax.JPEG">
+<h3>Cinemax</h3>
+<button onclick="mostrar('cinemax')">Ver programación</button>
+</div>
+
+<div class="card">
+<img src="fx.JPEG">
+<h3>FX Movies</h3>
+<button onclick="mostrar('fx')">Ver programación</button>
+</div>
+
+<div class="card">
+<img src="clarocinema.JPEG">
+<h3>Claro Cinema</h3>
+<button onclick="mostrar('clarocinema')">Ver programación</button>
+</div>
+
+<div class="card">
+<img src="dinamita.JPEG">
+<h3>cinema Dinamita</h3>
+<button onclick="mostrar('dinamita')">Ver programación</button>
+</div>
+
+<div class="card">
+<img src="foxchanel.JPEG">
+<h3>Fox Channel</h3>
+<button onclick="mostrar('foxchannel')">Ver programación</button>
+</div>
+
+</div>
+
+<button onclick="mostrar('categorias')">Volver</button>
+</div>
+
+<!-- ================= ESTILO TABLA PRO ================= -->
+<style>
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:10px;
+    background:#111;
+    color:#fff;
+}
+
+th,td{
+    border:2px solid #00ffcc;
+    padding:10px;
+}
+
+th{
+    background:#00ffcc;
+    color:#000;
+}
+
+a{
+    color:#00ffcc;
+    font-weight:bold;
+}
+</style>
+
+<!-- ================= SPACE ================= -->
+<div id="space" class="seccion">
+<h2>Space</h2>
+
+<table>
+<tr><th>Hora</th><th>Película</th></tr>
+
+<tr><td>6:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Rambo+pelicula" target="_blank">Rambo</a></td></tr>
+<tr><td>7:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Rocky+pelicula" target="_blank">Rocky</a></td></tr>
+<tr><td>8:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Terminator+pelicula" target="_blank">Terminator</a></td></tr>
+<tr><td>9:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Predator+pelicula" target="_blank">Predator</a></td></tr>
+<tr><td>10:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Gladiator+pelicula" target="_blank">Gladiator</a></td></tr>
+
+</table>
+
+<button onclick="mostrar('peliculas')">Volver</button>
+</div>
+
+<!-- ================= CINEMAX ================= -->
+<div id="cinemax" class="seccion">
+<h2>Cinemax</h2>
+
+<table>
+<tr><th>Hora</th><th>Película</th></tr>
+
+<tr><td>6:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Titanic+pelicula" target="_blank">Titanic</a></td></tr>
+<tr><td>7:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Forrest+Gump+pelicula" target="_blank">Forrest Gump</a></td></tr>
+<tr><td>8:00 PM</td><td><a href="https://www.youtube.com/results?search_query=El+Padrino+pelicula" target="_blank">El Padrino</a></td></tr>
+<tr><td>9:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Interstellar+pelicula" target="_blank">Interstellar</a></td></tr>
+<tr><td>10:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Matrix+pelicula" target="_blank">Matrix</a></td></tr>
+
+</table>
+
+<button onclick="mostrar('peliculas')">Volver</button>
+</div>
+
+<!-- ================= FX MOVIES ================= -->
+<div id="fx" class="seccion">
+<h2>FX Movies</h2>
+
+<table>
+<tr><th>Hora</th><th>Película</th></tr>
+
+<tr><td>6:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Deadpool+pelicula" target="_blank">Deadpool</a></td></tr>
+<tr><td>7:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Logan+pelicula" target="_blank">Logan</a></td></tr>
+<tr><td>8:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Venom+pelicula" target="_blank">Venom</a></td></tr>
+<tr><td>9:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Shrek+pelicula" target="_blank">Shrek</a></td></tr>
+<tr><td>10:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Toy+Story+pelicula" target="_blank">Toy Story</a></td></tr>
+
+</table>
+
+<button onclick="mostrar('peliculas')">Volver</button>
+</div>
+
+<!-- ================= CLARO CINEMA ================= -->
+<div id="clarocinema" class="seccion">
+<h2>Claro Cinema</h2>
+
+<table>
+<tr><th>Hora</th><th>Película</th></tr>
+
+<tr><td>6:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Avatar+pelicula" target="_blank">Avatar</a></td></tr>
+<tr><td>7:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Jumanji+pelicula" target="_blank">Jumanji</a></td></tr>
+<tr><td>8:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Frozen+pelicula" target="_blank">Frozen</a></td></tr>
+<tr><td>9:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Cars+pelicula" target="_blank">Cars</a></td></tr>
+<tr><td>10:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Moana+pelicula" target="_blank">Moana</a></td></tr>
+
+</table>
+
+<button onclick="mostrar('peliculas')">Volver</button>
+</div>
+
+<!-- ================= DINAMITA ================= -->
+<div id="dinamita" class="seccion">
+<h2>Dinamita</h2>
+
+<table>
+<tr><th>Hora</th><th>Película</th></tr>
+
+<tr><td>6:00 PM</td><td><a href="https://www.youtube.com/results?search_query=accion+pelicula+1" target="_blank">Acción 1</a></td></tr>
+<tr><td>7:00 PM</td><td><a href="https://www.youtube.com/results?search_query=accion+pelicula+2" target="_blank">Acción 2</a></td></tr>
+<tr><td>8:00 PM</td><td><a href="https://www.youtube.com/results?search_query=accion+pelicula+3" target="_blank">Acción 3</a></td></tr>
+<tr><td>9:00 PM</td><td><a href="https://www.youtube.com/results?search_query=accion+pelicula+4" target="_blank">Acción 4</a></td></tr>
+<tr><td>10:00 PM</td><td><a href="https://www.youtube.com/results?search_query=accion+pelicula+5" target="_blank">Acción 5</a></td></tr>
+
+</table>
+
+<button onclick="mostrar('peliculas')">Volver</button>
+</div>
+
+<!-- ================= FOX CHANNEL ================= -->
+<div id="foxchannel" class="seccion">
+<h2>Fox Channel</h2>
+
+<table>
+<tr><th>Hora</th><th>Película</th></tr>
+
+<tr><td>6:00 PM</td><td><a href="https://www.youtube.com/results?search_query=drama+pelicula+1" target="_blank">Drama 1</a></td></tr>
+<tr><td>7:00 PM</td><td><a href="https://www.youtube.com/results?search_query=drama+pelicula+2" target="_blank">Drama 2</a></td></tr>
+<tr><td>8:00 PM</td><td><a href="https://www.youtube.com/results?search_query=drama+pelicula+3" target="_blank">Drama 3</a></td></tr>
+<tr><td>9:00 PM</td><td><a href="https://www.youtube.com/results?search_query=drama+pelicula+4" target="_blank">Drama 4</a></td></tr>
+<tr><td>10:00 PM</td><td><a href="https://www.youtube.com/results?search_query=drama+pelicula+5" target="_blank">Drama 5</a></td></tr>
+
+</table>
+
+<button onclick="mostrar('peliculas')">Volver</button>
+</div>
+
+<!-- ================= NOVELAS ================= -->
+<div id="novelas" class="seccion">
+<h2 style="letter-spacing:3px; text-transform:uppercase;">Novelas</h2>
+
+<div class="grid">
+
+<div class="card">
+<img src="tl.JPEG ">
+<h3>TL Novelas</h3>
+<button onclick="mostrar('tl')">Ver programación</button>
+</div>
+
+<div class="card">
+<img src="tntnovelas.JPEG ">
+<h3>TNT Novelas</h3>
+<button onclick="mostrar('tntnovelas')">Ver programación</button>
+</div>
+
+<div class="card">
+<img src="trama.JPEG ">
+<h3>Trama</h3>
+<button onclick="mostrar('trama')">Ver programación</button>
+</div>
+
+<div class="card">
+<img src="corazon.JPEG ">
+<h3>Corazón</h3>
+<button onclick="mostrar('corazon')">Ver programación</button>
+</div>
+
+
+<div class="card">
+<img src="estrellas.JPEG ">
+<h3>Las Estrellas</h3>
+<button onclick="mostrar('estrellas')">Ver programación</button>
+</div>
+
+</div>
+
+<button onclick="mostrar('categorias')">Volver</button>
+</div>
+
+<!-- ================= ESTILO PRO TABLA ================= -->
+<style>
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:10px;
+    background:#0d0d0d;
+    color:#fff;
+    border:3px solid #ff00cc;
+}
+
+th,td{
+    border:2px solid #ff00cc;
+    padding:12px;
+    text-align:center;
+}
+
+th{
+    background:#ff00cc;
+    color:#000;
+    font-size:18px;
+}
+
+a{
+    color:#00ffff;
+    font-weight:bold;
+}
+</style>
+
+<!-- ================= TL NOVELAS ================= -->
+<div id="tl" class="seccion">
+<h2>TL Novelas</h2>
+
+<table>
+<tr><th>Hora</th><th>Novela</th></tr>
+
+<tr><td>6:00 PM</td><td><a href="https://www.youtube.com/results?search_query=La+Usurpadora+novela" target="_blank">La Usurpadora</a></td></tr>
+<tr><td>7:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Maria+la+del+barrio" target="_blank">María la del Barrio</a></td></tr>
+<tr><td>8:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Rubi+novela" target="_blank">Rubí</a></td></tr>
+<tr><td>9:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Rebelde+novela" target="_blank">Rebelde</a></td></tr>
+<tr><td>10:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Amor+Real" target="_blank">Amor Real</a></td></tr>
+
+</table>
+
+<button onclick="mostrar('novelas')">Volver</button>
+</div>
+
+<!-- ================= TNT NOVELAS ================= -->
+<div id="tntnovelas" class="seccion">
+<h2>TNT Novelas</h2>
+
+<table>
+<tr><th>Hora</th><th>Novela</th></tr>
+
+<tr><td>6:00 PM</td><td><a href="https://www.youtube.com/results?search_query=La+Doña+novela" target="_blank">La Doña</a></td></tr>
+<tr><td>7:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Sin+Senos+No+Hay+Paraiso" target="_blank">Sin Senos No Hay Paraíso</a></td></tr>
+<tr><td>8:00 PM</td><td><a href="https://www.youtube.com/results?search_query=El+Senor+de+los+Cielos" target="_blank">El Señor de los Cielos</a></td></tr>
+<tr><td>9:00 PM</td><td><a href="https://www.youtube.com/results?search_query=La+Reina+del+Sur" target="_blank">La Reina del Sur</a></td></tr>
+<tr><td>10:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Pasion+de+Gavilanes" target="_blank">Pasión de Gavilanes</a></td></tr>
+
+</table>
+
+<button onclick="mostrar('novelas')">Volver</button>
+</div>
+
+<!-- ================= TRAMA ================= -->
+<div id="trama" class="seccion">
+<h2>Trama</h2>
+
+<table>
+<tr><th>Hora</th><th>Novela</th></tr>
+
+<tr><td>6:00 PM</td><td><a href="https://www.youtube.com/results?search_query=La+Madrastra+novela" target="_blank">La Madrastra</a></td></tr>
+<tr><td>7:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Sortilegio+novela" target="_blank">Sortilegio</a></td></tr>
+<tr><td>8:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Cuando+Me+Enamoro" target="_blank">Cuando Me Enamoro</a></td></tr>
+<tr><td>9:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Teresa+novela" target="_blank">Teresa</a></td></tr>
+<tr><td>10:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Corazon+Indomable" target="_blank">Corazón Indomable</a></td></tr>
+
+</table>
+
+<button onclick="mostrar('novelas')">Volver</button>
+</div>
+
+<!-- ================= CORAZÓN ================= -->
+<div id="corazon" class="seccion">
+<h2>Corazón</h2>
+
+<table>
+<tr><th>Hora</th><th>Novela</th></tr>
+
+<tr><td>6:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Amores+Verdaderos" target="_blank">Amores Verdaderos</a></td></tr>
+<tr><td>7:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Soy+Tu+Duena" target="_blank">Soy Tu Dueña</a></td></tr>
+<tr><td>8:00 PM</td><td><a href="https://www.youtube.com/results?search_query=La+Que+No+Podia+Amar" target="_blank">La Que No Podía Amar</a></td></tr>
+<tr><td>9:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Porque+El+Amor+Manda" target="_blank">Porque el Amor Manda</a></td></tr>
+<tr><td>10:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Sortilegio+novela" target="_blank">Sortilegio</a></td></tr>
+
+</table>
+
+<button onclick="mostrar('novelas')">Volver</button>
+</div>
+
+<!-- ================= LAS ESTRELLAS ================= -->
+<div id="estrellas" class="seccion">
+<h2>Las Estrellas</h2>
+
+<table>
+<tr><th>Hora</th><th>Novela</th></tr>
+
+<tr><td>6:00 PM</td><td><a href="https://www.youtube.com/results?search_query=La+Desalmada" target="_blank">La Desalmada</a></td></tr>
+<tr><td>7:00 PM</td><td><a href="https://www.youtube.com/results?search_query=La+Mexicana+y+el+Guero" target="_blank">La Mexicana y el Güero</a></td></tr>
+<tr><td>8:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Imperio+de+Mentiras" target="_blank">Imperio de Mentiras</a></td></tr>
+<tr><td>9:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Amor+Dividido" target="_blank">Amor Dividido</a></td></tr>
+<tr><td>10:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Vencer+el+Miedo" target="_blank">Vencer el Miedo</a></td></tr>
+
+</table>
+
+<button onclick="mostrar('novelas')">Volver</button>
+</div>
+<!-- ================= ENTRETENIMIENTO ================= -->
+<div id="entretenimiento" class="seccion">
+<h2 style="letter-spacing:3px; text-transform:uppercase;">Entretenimiento</h2>
+
+<div class="grid">
+
+<div class="card">
+<img src="disneychannel.JPEG ">
+<h3>Disney Channel</h3>
+<button onclick="mostrar('disney')">Ver programación</button>
+</div>
+
+<div class="card">
+<img src="disneyjunior.JPEG ">
+<h3>Disney Junior</h3>
+<button onclick="mostrar('disneyjunior')">Ver programación</button>
+</div>
+
+<div class="card">
+<img src="discoverykids.JPEG ">
+<h3>Discovery Kids</h3>
+<button onclick="mostrar('discovery')">Ver programación</button>
+</div>
+
+<div class="card">
+<img src="cartoonnetwork.JPEG ">
+<h3>Cartoon Network</h3>
+<button onclick="mostrar('cartoon')">Ver programación</button>
+</div>
+
+<div class="card">
+<img src="nick.PNG ">
+<h3>Nickelodeon</h3>
+<button onclick="mostrar('nick')">Ver programación</button>
+</div>
+
+<div class="card">
+<img src="semillitas.JPEG ">
+<h3>Semillitas</h3>
+<button onclick="mostrar('semillitas')">Ver programación</button>
+</div>
+
+</div>
+
+<button onclick="mostrar('categorias')">Volver</button>
+</div>
+
+<!-- ================= ESTILO PRO LUCES ================= -->
+<style>
+.programacion-box{
+    max-width:600px;
+    margin:20px auto;
+    padding:20px;
+    background:#111;
+    border-radius:15px;
+    border:3px solid #00ffff;
+    box-shadow:0 0 20px #00ffff, 0 0 40px #ff00ff;
+    text-align:center;
+}
+
+.programacion-box h2{
+    color:#00ffff;
+    margin-bottom:10px;
+    text-shadow:0 0 10px #00ffff;
+}
+
+.programacion-box table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:10px;
+}
+
+.programacion-box th, 
+.programacion-box td{
+    border:2px solid #ff00ff;
+    padding:12px;
+}
+
+.programacion-box th{
+    background:#ff00ff;
+    color:#000;
+}
+
+.programacion-box a{
+    color:#00ffff;
+    font-weight:bold;
+}
+</style>
+
+<!-- ================= DISNEY CHANNEL ================= -->
+<div id="disney" class="seccion">
+<div class="programacion-box">
+<h2>Disney Channel</h2>
+
+<table>
+<tr><th>Hora</th><th>Programa</th></tr>
+
+<tr><td>6:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Disney+Channel+en+vivo" target="_blank">En Vivo</a></td></tr>
+<tr><td>7:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Hannah+Montana" target="_blank">Hannah Montana</a></td></tr>
+<tr><td>8:00 PM</td><td><a href="https://www.youtube.com/results?search_query=High+School+Musical" target="_blank">High School Musical</a></td></tr>
+<tr><td>9:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Zack+y+Cody" target="_blank">Zack y Cody</a></td></tr>
+<tr><td>10:00 PM</td><td><a href="https://www.youtube.com/results?search_query=Phineas+y+Ferb" target="_blank">Phineas y Ferb</a></td></tr>
+
+</table>
+
+<button onclick="mostrar('entretenimiento')">Volver</button>
+</div>
+</div>
+
+<!-- ================= DISNEY JUNIOR ================= -->
+<div id="disneyjunior" class="seccion">
+<div class="programacion-box">
+<h2>Disney Junior</h2>
+
+<table>
+<tr><th>Hora</th><th>Programa</th></tr>
+
+<tr><td>6:00 PM</td><td><a href="#">Mickey Mouse Clubhouse</a></td></tr>
+<tr><td>7:00 PM</td><td><a href="#">Patoaventuras</a></td></tr>
+<tr><td>8:00 PM</td><td><a href="#">La Casa de Mickey</a></td></tr>
+<tr><td>9:00 PM</td><td><a href="#">Doc McStuffins</a></td></tr>
+<tr><td>10:00 PM</td><td><a href="#">PJ Masks</a></td></tr>
+
+</table>
+
+<button onclick="mostrar('entretenimiento')">Volver</button>
+</div>
+</div>
+
+<!-- ================= DISCOVERY KIDS ================= -->
+<div id="discovery" class="seccion">
+<div class="programacion-box">
+<h2>Discovery Kids</h2>
+
+<table>
+<tr><th>Hora</th><th>Programa</th></tr>
+
+<tr><td>6:00 PM</td><td><a href="#">Peppa Pig</a></td></tr>
+<tr><td>7:00 PM</td><td><a href="#">Dora la Exploradora</a></td></tr>
+<tr><td>8:00 PM</td><td><a href="#">Go Diego Go</a></td></tr>
+<tr><td>9:00 PM</td><td><a href="#">Pocoyó</a></td></tr>
+<tr><td>10:00 PM</td><td><a href="#">Team Umizoomi</a></td></tr>
+
+</table>
+
+<button onclick="mostrar('entretenimiento')">Volver</button>
+</div>
+</div>
+
+<!-- ================= CARTOON NETWORK ================= -->
+<div id="cartoon" class="seccion">
+<div class="programacion-box">
+<h2>Cartoon Network</h2>
+
+<table>
+<tr><th>Hora</th><th>Programa</th></tr>
+
+<tr><td>6:00 PM</td><td><a href="#">Ben 10</a></td></tr>
+<tr><td>7:00 PM</td><td><a href="#">Hora de Aventura</a></td></tr>
+<tr><td>8:00 PM</td><td><a href="#">El Laboratorio de Dexter</a></td></tr>
+<tr><td>9:00 PM</td><td><a href="#">Las Chicas Superpoderosas</a></td></tr>
+<tr><td>10:00 PM</td><td><a href="#">Gumball</a></td></tr>
+
+</table>
+
+<button onclick="mostrar('entretenimiento')">Volver</button>
+</div>
+</div>
+
+<!-- ================= NICKELODEON ================= -->
+<div id="nick" class="seccion">
+<div class="programacion-box">
+<h2>Nickelodeon</h2>
+
+<table>
+<tr><th>Hora</th><th>Programa</th></tr>
+
+<tr><td>6:00 PM</td><td><a href="#">Bob Esponja</a></td></tr>
+<tr><td>7:00 PM</td><td><a href="#">Dora</a></td></tr>
+<tr><td>8:00 PM</td><td><a href="#">iCarly</a></td></tr>
+<tr><td>9:00 PM</td><td><a href="#">Drake y Josh</a></td></tr>
+<tr><td>10:00 PM</td><td><a href="#">Henry Danger</a></td></tr>
+
+</table>
+
+<button onclick="mostrar('entretenimiento')">Volver</button>
+</div>
+</div>
+
+<!-- ================= SEMILLITAS ================= -->
+<div id="semillitas" class="seccion">
+<div class="programacion-box">
+<h2>Semillitas</h2>
+
+<table>
+<tr><th>Hora</th><th>Programa</th></tr>
+
+<tr><td>6:00 PM</td><td><a href="#">Canciones Infantiles</a></td></tr>
+<tr><td>7:00 PM</td><td><a href="#">Aprender Colores</a></td></tr>
+<tr><td>8:00 PM</td><td><a href="#">Animales</a></td></tr>
+<tr><td>9:00 PM</td><td><a href="#">Formas</a></td></tr>
+<tr><td>10:00 PM</td><td><a href="#">Historias</a></td></tr>
+
+</table>
+
+<button onclick="mostrar('entretenimiento')">Volver</button>
+</div>
+</div>
+
+<script>
+function mostrar(id){
+    document.querySelectorAll('.seccion').forEach(s=>s.classList.remove('activa'));
+    document.getElementById(id).classList.add('activa');
+}
+</script>
+
+</body>
+</html>
